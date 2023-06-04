@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.config['DATA_FOLDER'] = os.path.join(pathlib.Path(__file__).parent.parent, 'data')
 
 
-@app.route('/maps/uploadImage/<str:map_id>', methods=['POST'])
+@app.route('/maps/uploadImage/<map_id>', methods=['POST'])
 async def maps_upload(map_id):
     request = Request()
 
@@ -46,7 +46,7 @@ async def maps_upload(map_id):
 #     return send_file(path_or_file=os.path.join(app.config['DATA_FOLDER'], map_id, '__map', map.filename), attachment_filename=map.filename)
 
 
-@app.route('/points/uploadImages/<str:map_id>/<str:point_id>', methods=['POST'])
+@app.route('/points/uploadImages/<map_id>/<point_id>', methods=['POST'])
 async def points_upload(map_id, point_id):
     request = Request()
 
@@ -88,7 +88,7 @@ async def points_upload(map_id, point_id):
 #     return send_file(path_or_file=os.path.join(app.config['DATA_FOLDER'], map.filename), attachment_filename=map.filename)
 
 
-@app.route('/maps/getMap/<str:map_id>', methods=['POST'])
+@app.route('/maps/getMap/<map_id>', methods=['POST'])
 async def maps_get():
     request = Request()
 
