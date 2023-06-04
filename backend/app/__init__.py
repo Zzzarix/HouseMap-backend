@@ -1,4 +1,4 @@
-from flask import Flask, Response, Request
+from flask import Flask, Response, request
 
 from werkzeug.utils import secure_filename
 
@@ -15,8 +15,6 @@ app.config['DATA_FOLDER'] = os.path.join(pathlib.Path(__file__).parent.parent, '
 
 @app.route('/maps/uploadImage/<map_id>', methods=['POST'])
 async def maps_upload(map_id):
-    request = Request()
-
     image = request.files.get('image')
 
     if not image or image.filename == '':
@@ -48,8 +46,6 @@ async def maps_upload(map_id):
 
 @app.route('/points/uploadImages/<map_id>/<point_id>', methods=['POST'])
 async def points_upload(map_id, point_id):
-    request = Request()
-
     images = request.files.to_dict()
 
     if not images:
@@ -90,8 +86,6 @@ async def points_upload(map_id, point_id):
 
 @app.route('/maps/getMap/<map_id>', methods=['POST'])
 async def maps_get():
-    request = Request()
-
     map_id = request.json.get('map_id')
 
     if not map_id:
