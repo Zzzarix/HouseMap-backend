@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  housemap-db:
+    image: mongo:latest
+    restart: always
+    container_name: houseMapDb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - 13450:27017
+
+  housemap-backend:
+    build: ./app/
+    container_name: houseMapBackend
