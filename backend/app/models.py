@@ -41,3 +41,4 @@ class Point(_Object):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.name = name
+        self.color = color
