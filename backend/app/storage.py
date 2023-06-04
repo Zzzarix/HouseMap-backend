@@ -1,7 +1,7 @@
 import motor.motor_asyncio as mongo
 from .models import *
 import secrets
-_client = mongo.AsyncIOMotorClient('mongodb://Ybu7yNneQNKY7fXnc5nL262z1dE:f4-NO_WtpyZOFejOu8_xwWRiZo0@housemap-db:13450/')
+_client = mongo.AsyncIOMotorClient('mongodb://Ybu7yNneQNKY7fXnc5nL262z1dE:f4-NO_WtpyZOFejOu8_xwWRiZo0@77.232.137.229:27017/')
 _db: mongo.AsyncIOMotorDatabase = _client.get_database('HouseMapDb')
 
 
