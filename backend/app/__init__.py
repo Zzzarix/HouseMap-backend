@@ -1,3 +1,4 @@
+import traceback
 from flask import Flask, Response, request, make_response
 
 from werkzeug.utils import secure_filename
@@ -65,6 +66,7 @@ async def points_upload(map_id, point_id):
     try:
         await Storage.create_point(point_id, request.args['name'], float(request.args['pos_x']), float(request.args['pos_y']), request.args['color'], filenames)
     except Exception as exc:
+        traceback.print_exception(type(exc), exc, exc.__traceback__)
         return make_response({'ok': False, 'error': 'Cannot create point from provided data'}, 400)
 
     return make_response({'ok': True}, 200)
