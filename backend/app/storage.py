@@ -5,6 +5,8 @@ import secrets
 
 class Storage:
 
+    __db = None
+
     def init(cls):
         _client = mongo.AsyncIOMotorClient('mongodb://Ybu7yNneQNKY7fXnc5nL262z1dE:f4-NO_WtpyZOFejOu8_xwWRiZo0@77.232.137.229:27017/')
         cls.__db: mongo.AsyncIOMotorDatabase = _client.get_database('HouseMapDb')
