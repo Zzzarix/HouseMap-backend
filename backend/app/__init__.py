@@ -50,13 +50,21 @@ async def points_upload(map_id, point_id):
     images = request.files.to_dict()
 
     if not images:
-        return make_response({'ok': False, 'error': 'Map already exists'}, 400)
-        return Response(status=400, response={'ok': False, 'error': 'Not images provided'})
+        return make_response({'ok': False, 'error': 'Not images provided'}, 400)
+    
+    point = await Storage.get_point(map_id, point_id)
+
+    if point:
+        return make_response({'ok': False, 'error': 'Point already exists'}, 400)
 
     filenames = []
 
     filespath = os.path.join(app.config['DATA_FOLDER'], map_id, point_id)
-    os.makedirs(filespath)
+
+    try:
+        os.makedirs(filespath)
+    except:
+        pass
 
     for name, image in images.items():
         filename = os.path.join(filespath, secure_filename(image.filename))

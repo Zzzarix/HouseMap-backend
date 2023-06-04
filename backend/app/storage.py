@@ -29,6 +29,11 @@ class _Storage:
 
         return point
 
+    async def get_point(self, map_id: str, point_id: str) -> Point:
+        res = self.__db.points.find_one({'map_id': map_id, 'point_id': point_id})
+
+        return Point(**res) if res else None
+
     async def get_points(self, map_id: str) -> list[Point]:
         res = []
 
