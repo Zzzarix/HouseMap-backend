@@ -10,6 +10,8 @@ import os
 
 app = Flask(__name__)
 
+Storage().init()
+
 app.config['DATA_FOLDER'] = os.path.join(pathlib.Path(__file__).parent.parent, 'data')
 
 

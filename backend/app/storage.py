@@ -1,13 +1,14 @@
 import motor.motor_asyncio as mongo
 from .models import *
 import secrets
-_client = mongo.AsyncIOMotorClient('mongodb://Ybu7yNneQNKY7fXnc5nL262z1dE:f4-NO_WtpyZOFejOu8_xwWRiZo0@77.232.137.229:27017/')
-_db: mongo.AsyncIOMotorDatabase = _client.get_database('HouseMapDb')
 
 
 class Storage:
 
-    __db = _db
+    def init(cls):
+        _client = mongo.AsyncIOMotorClient('mongodb://Ybu7yNneQNKY7fXnc5nL262z1dE:f4-NO_WtpyZOFejOu8_xwWRiZo0@77.232.137.229:27017/')
+        cls.__db: mongo.AsyncIOMotorDatabase = _client.get_database('HouseMapDb')
+
 
     @classmethod
     async def create_map(cls, map_id: str, filename: str) -> Map:
