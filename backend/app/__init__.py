@@ -19,16 +19,24 @@ async def maps_upload(map_id):
 
     if not image or image.filename == '':
         return Response(status=400, response={'ok': False, 'error': 'Not image provided'})
+    
+    map = await Storage.get_map(map_id)
+
+    if map:
+        return Response(status=400, response={'ok': False, 'error': 'Map already exists'})
+    
+    await Storage.create_map(map_id, filename)
 
     filepath = os.path.join(app.config['DATA_FOLDER'], map_id, '__map')
-
-    os.makedirs(filepath)
+    
+    try:
+        os.makedirs(filepath)
+    except:
+        pass
 
     filename = os.path.join(filepath, secure_filename(image.filename)) 
-
+    
     image.save(filename)
-
-    await Storage.create_map(map_id, filename)
 
     return Response(status=200, response={'ok': True})
 
