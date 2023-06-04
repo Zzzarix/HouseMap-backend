@@ -2,7 +2,7 @@ from flask import Flask, Response, Request
 
 from werkzeug.utils import secure_filename
 
-from .storage import Storage
+from core.storage import Storage
 
 import pathlib
 import os
@@ -120,3 +120,6 @@ async def maps_get():
     }
 
     return Response(status=200, response=data)
+
+
+app.run('0.0.0.0', 80, debug=True)

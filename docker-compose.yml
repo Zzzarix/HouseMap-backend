@@ -11,9 +11,6 @@ services:
     ports:
       - 13450:27017
 
-    logging:
-      driver: none
-
     volumes:
       - /home/mongo:/data/db
 
