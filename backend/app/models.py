@@ -34,7 +34,7 @@ class Point(_Object):
     name: str
     color: str
 
-    def __init__(self, id: str, map_id: str, filenames: list[str], pos_x: float, pos_y: float, name: str, **kwargs) -> None:
+    def __init__(self, id: str, map_id: str, filenames: list[str], pos_x: float, pos_y: float, name: str, color: str, **kwargs) -> None:
         self.id = id
         self.map_id = map_id
         self.filenames = filenames
