@@ -22,3 +22,6 @@ services:
 
     volumes:
     - /home/data:/data
+
+    depends_on:
+      - housemap-db
