@@ -6,8 +6,8 @@ services:
     restart: always
     container_name: houseMapDb
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_ROOT_USERNAME: Ybu7yNneQNKY7fXnc5nL262z1dE
+      MONGO_INITDB_ROOT_PASSWORD: f4-NO_WtpyZOFejOu8_xwWRiZo0
     ports:
       - 13450:27017
 
