@@ -11,8 +11,8 @@ services:
     ports:
       - 13450:27017
 
-      volumes:
-        - mongo_volume:/
+    volumes:
+      - /home/mongo:/data/db
 
   housemap-backend:
     build: ./backend/
@@ -20,3 +20,6 @@ services:
 
     ports:
       - 80:80
+
+    volumes:
+    - /home/data:/app/data

@@ -10,7 +10,7 @@ import os
 
 app = Flask(__file__)
 
-app.config['DATA_FOLDER'] = os.path.join(pathlib.Path(__file__).parent, 'data')
+app.config['DATA_FOLDER'] = os.path.join(pathlib.Path(__file__).parent.parent, 'data')
 
 
 @app.route('/maps/uploadImage/<str:map_id>', methods=['POST'])
