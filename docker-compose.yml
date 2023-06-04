@@ -5,6 +5,7 @@ services:
     image: mongo:latest
     restart: always
     container_name: housemap-db
+    command: mongod --quiet --logpath /dev/null 
     environment:
       MONGO_INITDB_ROOT_USERNAME: Ybu7yNneQNKY7fXnc5nL262z1dE
       MONGO_INITDB_ROOT_PASSWORD: f4-NO_WtpyZOFejOu8_xwWRiZo0
