@@ -24,8 +24,6 @@ async def maps_upload(map_id):
 
     if map:
         return Response(status=400, response={'ok': False, 'error': 'Map already exists'})
-    
-    await Storage.create_map(map_id, filename)
 
     filepath = os.path.join(app.config['DATA_FOLDER'], map_id, '__map')
     
@@ -35,6 +33,8 @@ async def maps_upload(map_id):
         pass
 
     filename = os.path.join(filepath, secure_filename(image.filename)) 
+
+    await Storage.create_map(map_id, filename)
     
     image.save(filename)
 
