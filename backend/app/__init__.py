@@ -1,4 +1,4 @@
-from flask import Flask, Response, request
+from flask import Flask, Response, request, make_response
 
 from werkzeug.utils import secure_filename
 
@@ -20,12 +20,13 @@ async def maps_upload(map_id):
     image = request.files.get('image')
 
     if not image or image.filename == '':
-        return Response(status=400, response={'ok': False, 'error': 'Not image provided'})
+        return make_response({'ok': False, 'error': 'Not image provided'}, 400)
     
     map = await Storage.get_map(map_id)
 
     if map:
-        return Response(status=400, response={'ok': False, 'error': 'Map already exists'})
+        return make_response({'ok': False, 'error': 'Map already exists'}, 400)
+        # return Response(status=400, response={'ok': False, 'error': 'Map already exists'})
 
     filepath = os.path.join(app.config['DATA_FOLDER'], map_id, '__map')
     
@@ -40,7 +41,8 @@ async def maps_upload(map_id):
     
     image.save(filename)
 
-    return Response(status=200, response={'ok': True})
+    # return Response(status=200, response={'ok': True})
+    return make_response({'ok': True}, 200)
 
 
 # @app.route('/maps/getImage/<str:map_id>', methods=['GET'])
