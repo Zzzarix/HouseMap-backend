@@ -122,4 +122,4 @@ async def maps_get():
     return Response(status=200, response=data)
 
 
-app.run('0.0.0.0', 80, debug=True)
+app.run('0.0.0.0', 80, debug=False)
