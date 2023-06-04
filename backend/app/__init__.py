@@ -20,7 +20,11 @@ async def maps_upload(map_id):
     if not image or image.filename == '':
         return Response(status=400, response={'ok': False, 'error': 'Not image provided'})
 
-    filename = os.path.join(app.config['DATA_FOLDER'], '__map', secure_filename(image.filename))
+    filepath = os.path.join(app.config['DATA_FOLDER'], map_id, '__map')
+
+    os.makedirs(filepath)
+
+    filename = os.path.join(filepath, secure_filename(image.filename)) 
 
     image.save(filename)
 
@@ -53,8 +57,11 @@ async def points_upload(map_id, point_id):
 
     filenames = []
 
+    filespath = os.path.join(app.config['DATA_FOLDER'], map_id, point_id)
+    os.makedirs(filespath)
+
     for name, image in images.items():
-        filename = os.path.join(app.config['DATA_FOLDER'], map_id, point_id, secure_filename(image.filename))
+        filename = os.path.join(filespath, secure_filename(image.filename))
         filenames.append(filename)
         image.save(filename)
     
