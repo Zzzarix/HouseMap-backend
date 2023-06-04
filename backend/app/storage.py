@@ -21,8 +21,8 @@ class _Storage:
 
         return Map(**res) if res else None
 
-    async def create_point(self, point_id: str, name: str, pos_x: float, pos_y: float, color: str, filenames: list[str]) -> Point:
-        point = Point(point_id=point_id, name=name, pos_x=pos_x,
+    async def create_point(self, point_id: str, map_id: str, name: str, pos_x: float, pos_y: float, color: str, filenames: list[str]) -> Point:
+        point = Point(id=point_id, map_id=map_id, name=name, pos_x=pos_x,
                       pos_y=pos_y, color=color, filenames=filenames)
 
         await self.__db.points.insert_one(point.get_payload())

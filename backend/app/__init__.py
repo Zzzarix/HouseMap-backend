@@ -72,7 +72,7 @@ async def points_upload(map_id, point_id):
         image.save(filename)
 
     try:
-        await Storage.create_point(point_id, request.args['name'], float(request.args['pos_x']), float(request.args['pos_y']), request.args['color'], filenames)
+        await Storage.create_point(point_id, map_id, request.args['name'], float(request.args['pos_x']), float(request.args['pos_y']), request.args['color'], filenames)
     except Exception as exc:
         traceback.print_exception(type(exc), exc, exc.__traceback__)
         return make_response({'ok': False, 'error': 'Cannot create point from provided data'}, 400)
