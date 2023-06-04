@@ -19,7 +19,7 @@ class Storage:
     async def get_map(cls, map_id: str) -> Map:
         res = await _db.maps.find_one({'id': map_id})
 
-        return Map(**res)
+        return Map(**res) if res else None
 
     @classmethod
     async def create_point(cls, point_id: str, name: str, pos_x: float, pos_y: float, color: str, filenames: list[str]) -> Point:
