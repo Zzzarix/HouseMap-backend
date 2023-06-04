@@ -7,17 +7,19 @@ _db: mongo.AsyncIOMotorDatabase = _client.get_database('HouseMapDb')
 
 class Storage:
 
+    __db = _db
+
     @classmethod
     async def create_map(cls, map_id: str, filename: str) -> Map:
         map = Map(id=map_id, filename=filename)
 
-        await _db.maps.insert_one(map.get_payload())
+        await cls.__db.maps.insert_one(map.get_payload())
 
         return map
 
     @classmethod
     async def get_map(cls, map_id: str) -> Map:
-        res = await _db.maps.find_one({'id': map_id})
+        res = await cls.__db.maps.find_one({'id': map_id})
 
         return Map(**res) if res else None
 
@@ -26,7 +28,7 @@ class Storage:
         point = Point(point_id=point_id, name=name, pos_x=pos_x,
                       pos_y=pos_y, color=color, filenames=filenames)
 
-        await _db.points.insert_one(point.get_payload())
+        await cls.__db.points.insert_one(point.get_payload())
 
         return point
 
@@ -34,7 +36,7 @@ class Storage:
     async def get_points(cls, map_id: str) -> list[Point]:
         res = []
 
-        async for p in _db.points.find({'map_id': map_id}):
+        async for p in cls.__db.points.find({'map_id': map_id}):
             res.append(Point(**p))
 
         return res
