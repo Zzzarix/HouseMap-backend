@@ -1,5 +1,5 @@
 import motor.motor_asyncio as mongo
-from .models import *
+from models import *
 
 _client = mongo.AsyncIOMotorClient('mongodb://root:root@housemap-db:13450')
 _db: mongo.AsyncIOMotorDatabase = _client.get_database('HouseMapDb')

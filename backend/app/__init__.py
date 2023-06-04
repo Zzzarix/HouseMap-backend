@@ -2,7 +2,7 @@ from flask import Flask, Response, request
 
 from werkzeug.utils import secure_filename
 
-from .storage import Storage
+from storage import Storage
 
 import pathlib
 import os
