@@ -80,7 +80,7 @@ async def points_upload(map_id, point_id):
     return make_response({'ok': True}, 200)
 
 
-@app.route('/maps/getMap/<map_id>', methods=['POST'])
+@app.route('/maps/getMap', methods=['POST'])
 async def maps_get():
     map_id = request.json.get('map_id')
 
