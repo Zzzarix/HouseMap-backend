@@ -8,7 +8,7 @@ import pathlib
 import os
 # from secrets import token_hex
 
-app = Flask(__file__)
+app = Flask(__name__)
 
 app.config['DATA_FOLDER'] = os.path.join(pathlib.Path(__file__).parent.parent, 'data')
 
