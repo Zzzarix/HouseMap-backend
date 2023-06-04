@@ -2,7 +2,7 @@ from flask import Flask, Response, request
 
 from werkzeug.utils import secure_filename
 
-from .storage import Storage
+from .storage import _Storage
 
 import pathlib
 import os
@@ -10,7 +10,7 @@ import os
 
 app = Flask(__name__)
 
-Storage().init()
+Storage = _Storage()
 
 app.config['DATA_FOLDER'] = os.path.join(pathlib.Path(__file__).parent.parent, 'data')
 
