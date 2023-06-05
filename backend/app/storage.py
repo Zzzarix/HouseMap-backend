@@ -20,6 +20,14 @@ class _Storage:
         res = await self.__db.maps.find_one({'id': map_id})
 
         return Map(**res) if res else None
+    
+    async def get_maps(self) -> list[Map]:
+        res = []
+
+        async for m in self.__db.maps.find({}):
+            res.append(Map(**m))
+
+        return res
 
     async def create_point(self, point_id: str, map_id: str, name: str, pos_x: float, pos_y: float, color: str, filenames: list[str]) -> Point:
         point = Point(id=point_id, map_id=map_id, name=name, pos_x=pos_x,

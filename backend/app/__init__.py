@@ -80,8 +80,25 @@ async def points_upload(map_id, point_id):
     return make_response({'ok': True}, 200)
 
 
-@app.route('/maps/getMap', methods=['POST'])
+@app.route('/maps/getMaps', methods=['GET'])
 async def maps_get():
+
+    maps = await Storage.get_maps()
+
+    data = {
+        'ok': True,
+        'maps': [
+                {
+                    'id': m.id
+                } for m in maps
+            ]
+    }
+
+    return make_response(data, 200)
+
+
+@app.route('/maps/getMap', methods=['POST'])
+async def map_get():
     map_id = request.json.get('map_id')
 
     if not map_id:
