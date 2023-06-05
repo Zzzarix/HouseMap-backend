@@ -17,7 +17,7 @@ services:
 
   housemap-backend:
     build: ./backend/
-    container_name: backend
+    container_name: housemap-backend
     ports:
       - 80:80
 
