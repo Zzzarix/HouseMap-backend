@@ -87,11 +87,7 @@ async def maps_get():
 
     data = {
         'ok': True,
-        'maps': [
-                {
-                    'id': m.id
-                } for m in maps
-            ]
+        'maps': [m.id for m in maps]
     }
 
     return make_response(data, 200)
