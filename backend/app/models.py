@@ -15,6 +15,7 @@ class Map(_Object):
     _fields = ['id', 'filename']
 
     id: str
+    name: str
     filename: str
 
     def __init__(self, id: str, filename: str, **kwargs) -> None:

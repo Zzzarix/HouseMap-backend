@@ -95,7 +95,7 @@ async def maps_get():
 
 @app.route('/maps/getMap', methods=['POST'])
 async def map_get():
-    map_id = request.json.get('map_id')
+    map_id = request.json.get('map_id') if request.is_json() else None
 
     if not map_id:
         return make_response({'ok': False, 'error': 'Not map_id provided'}, 400)
