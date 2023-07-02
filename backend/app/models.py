@@ -18,8 +18,9 @@ class Map(_Object):
     name: str
     filename: str
 
-    def __init__(self, id: str, filename: str, **kwargs) -> None:
+    def __init__(self, id: str, name: str, filename: str, **kwargs) -> None:
         self.id = id
+        self.name = name
         self.filename = filename
 
 
