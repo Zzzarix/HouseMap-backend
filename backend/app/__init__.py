@@ -17,8 +17,8 @@ app.config['DATA_FOLDER'] = os.path.join(
     pathlib.Path(__file__).parent.parent, 'data')
 
 
-@app.route('/maps/uploadImage/<map_id>', methods=['POST'])
-async def maps_upload(map_id):
+@app.route('/maps/uploadImage/<map_id>/<map_name>', methods=['POST'])
+async def maps_upload(map_id: str, map_name: str):
     image = request.files.get('image')
 
     if not image or image.filename == '':
@@ -38,7 +38,7 @@ async def maps_upload(map_id):
 
     filename = os.path.join(filepath, secure_filename(image.filename))
 
-    await Storage.create_map(map_id, filename)
+    await Storage.create_map(map_id, map_name.replace('__', ' '), filename)
 
     image.save(filename)
 
@@ -87,7 +87,7 @@ async def maps_get():
 
     data = {
         'ok': True,
-        'maps': [m.id for m in maps]
+        'maps': {m.id: m.name for m in maps}
     }
 
     return make_response(data, 200)

@@ -12,7 +12,7 @@ class _Object:
 
 class Map(_Object):
 
-    _fields = ['id', 'filename']
+    _fields = ['id', 'name', 'filename']
 
     id: str
     name: str

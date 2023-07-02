@@ -16,9 +16,9 @@ class _Storage:
         except:
             self.__init__()
 
-    async def create_map(self, map_id: str, filename: str) -> Map:
+    async def create_map(self, map_id: str, map_name: str, filename: str) -> Map:
         await self.__check_conn()
-        map = Map(id=map_id, filename=filename)
+        map = Map(id=map_id, name=map_name, filename=filename)
 
         await self.__db.maps.insert_one(map.get_payload())
 
