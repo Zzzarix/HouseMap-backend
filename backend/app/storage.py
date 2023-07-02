@@ -7,7 +7,7 @@ class _Storage:
 
     def __init__(self):
         self.__client = mongo.AsyncIOMotorClient(
-            'mongodb://Ybu7yNneQNKY7fXnc5nL262z1dE:f4-NO_WtpyZOFejOu8_xwWRiZo0@77.232.137.229:27017/')
+            'mongodb://Ybu7yNneQNKY7fXnc5nL262z1dE:f4-NO_WtpyZOFejOu8_xwWRiZo0@80.90.187.220:27000/')
         self.__db: mongo.AsyncIOMotorDatabase = self.__client.get_database('HouseMapDb')
 
     async def __check_conn(self):
