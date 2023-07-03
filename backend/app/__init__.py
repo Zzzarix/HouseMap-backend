@@ -129,3 +129,8 @@ async def map_get():
 async def map_file_get(map_id: str, filename: str):
     # map = await Storage.get_map(map_id)
     return send_from_directory(directory=os.path.join(app.config['DATA_FOLDER'], map_id, '__map'), path=filename, as_attachment=False, mimetype='image/jpeg')
+
+@app.route('/files/point/<map_id>/<point_id>/<path:filename>', methods=['GET', 'POST'])
+async def points_file_get(map_id: str, point_id: str, filename: str):
+    # map = await Storage.get_map(map_id)
+    return send_from_directory(directory=os.path.join(app.config['DATA_FOLDER'], map_id, point_id), path=filename, as_attachment=False, mimetype='image/jpeg')
