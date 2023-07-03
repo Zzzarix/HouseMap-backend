@@ -1,5 +1,5 @@
 import traceback
-from flask import Flask, Response, request, make_response
+from flask import Flask, Response, request, make_response, send_file
 
 from werkzeug.utils import secure_filename
 
@@ -110,7 +110,7 @@ async def map_get():
     data = {
         'ok': True,
         'urls': {
-            'map': map.filename,
+            'map': '/files/map/'+map.id,
             'points': [
                 {
                     'filenames': p.filenames,
@@ -123,3 +123,9 @@ async def map_get():
     }
 
     return make_response(data, 200)
+
+
+@app.route('/files/map/<map_id>', methods=['GET'])
+async def map_file_get(map_id: str):
+    map = await Storage.get_map(map_id)
+    return send_file(map.filename)
