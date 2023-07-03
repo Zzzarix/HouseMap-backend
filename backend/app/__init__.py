@@ -125,7 +125,7 @@ async def map_get():
     return make_response(data, 200)
 
 
-@app.route('/files/map/<map_id>', methods=['GET'])
+@app.route('/files/map/<map_id>', methods=['GET', 'POST'])
 async def map_file_get(map_id: str):
     map = await Storage.get_map(map_id)
     return send_file(map.filename)
