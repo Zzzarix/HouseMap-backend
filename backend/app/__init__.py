@@ -1,5 +1,5 @@
 import traceback
-from flask import Flask, Response, request, make_response, send_file
+from flask import Flask, Response, request, make_response, send_from_directory
 
 from werkzeug.utils import secure_filename
 
@@ -38,7 +38,7 @@ async def maps_upload(map_id: str, map_name: str):
 
     filename = os.path.join(filepath, secure_filename(image.filename))
 
-    await Storage.create_map(map_id, map_name.replace('__', ' '), filename)
+    await Storage.create_map(map_id, map_name.replace('__', ' '), secure_filename(image.filename))
 
     image.save(filename)
 
@@ -68,7 +68,7 @@ async def points_upload(map_id, point_id):
 
     for name, image in images.items():
         filename = os.path.join(filespath, secure_filename(image.filename))
-        filenames.append(filename)
+        filenames.append(secure_filename(image.filename))
         image.save(filename)
 
     try:
@@ -110,7 +110,7 @@ async def map_get():
     data = {
         'ok': True,
         'urls': {
-            'map': '/files/map/'+map.id,
+            'map': '/files/map/'+map.id+'/'+map.filename,
             'points': [
                 {
                     'filenames': p.filenames,
@@ -125,7 +125,7 @@ async def map_get():
     return make_response(data, 200)
 
 
-@app.route('/files/map/<map_id>', methods=['GET', 'POST'])
-async def map_file_get(map_id: str):
-    map = await Storage.get_map(map_id)
-    return send_file(map.filename, as_attachment=False, mimetype='	image/jpeg')
+@app.route('/files/map/<map_id>/<path:filename>', methods=['GET', 'POST'])
+async def map_file_get(map_id: str, filename: str):
+    # map = await Storage.get_map(map_id)
+    return send_from_directory(directory=os.path.join(app.config['DATA_FOLDER'], map_id, '__map'), path=filename, as_attachment=False, mimetype='image/jpeg')
