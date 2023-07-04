@@ -67,7 +67,7 @@ async def points_upload(map_id, point_id):
         pass
 
     for name, image in images.items():
-        filename = os.path.join(filespath, secure_filename(image.name))
+        filename = os.path.join(filespath, secure_filename(image.filename))
         filenames.append(secure_filename(image.filename))
         image.save(filename)
 
