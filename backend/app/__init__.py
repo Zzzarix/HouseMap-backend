@@ -114,6 +114,7 @@ async def map_get():
             'points': [
                 {
                     'filenames': p.filenames,
+                    'id': p.id,
                     'pos_x': p.pos_x,
                     'pos_y': p.pos_y,
                     'name': p.name
